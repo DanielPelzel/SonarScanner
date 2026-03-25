@@ -3,14 +3,32 @@
 //
 #include <Arduino.h>
 
-
-//Variablen definieren
-float seconds;
-float distance_m;
-float distance_cm;
-
 int trig = 8;
 int echo = 7;
+
+
+float measure_distance() {
+
+    // Sicherstellen, dass der Pin vorher LOW ist
+    digitalWrite(trig, LOW);
+    delayMicroseconds(2);
+
+    //Sending Input signal (10 microseconds)
+    digitalWrite(trig, HIGH);
+    delayMicroseconds(10);
+    digitalWrite(trig, LOW);
+
+    //ultrasonic wave time
+    float seconds = pulseIn(echo, HIGH) * 1e-6;
+
+    //time to distance calc.
+    float distance_m = (seconds * 340.0 /2.0);
+    float distance_cm = distance_m * 100;
+
+
+    return distance_cm;
+}
+
 
 
 void setup() {
@@ -21,27 +39,8 @@ void setup() {
 
 void loop() {
 
-    // Sicherstellen, dass der Pin vorher LOW ist
-    digitalWrite(trig, LOW);
-    delayMicroseconds(2);
-
-    //Sending Input signal (10 microseconds)
-
-    digitalWrite(trig, HIGH);
-    delayMicroseconds(10);
-    digitalWrite(trig, LOW);
-
-    //ultrasonic wave time
-
-    seconds = pulseIn(echo, HIGH) * 1e-6;
-
-
-    //time to distance calc.
-
-    distance_m = (seconds * 340.0 /2.0);
-    distance_cm = distance_m * 100;
+    float distance_cm = measure_distance();
     Serial.println(distance_cm);
-
-
-
+    delay(1000);
 }
+
