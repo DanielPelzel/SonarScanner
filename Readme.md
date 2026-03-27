@@ -11,7 +11,7 @@ ultrasonic sensor measures distances and visualizes them in real-time using Pyth
 
 ## Software 
 C++  
-Python 
+Python   
 **Librarys:** pyserialm matplotlib, Arduino 
 
 
