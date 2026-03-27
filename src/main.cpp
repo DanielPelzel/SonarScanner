@@ -3,8 +3,8 @@
 //
 #include <Arduino.h>
 
-int trig = 8;
-int echo = 7;
+const int trig = 8;
+const int echo = 7;
 
 
 float measure_distance() {
@@ -24,7 +24,6 @@ float measure_distance() {
     //time to distance calc.
     float distance_m = (seconds * 340.0 /2.0);
     float distance_cm = distance_m * 100;
-
 
     return distance_cm;
 }
