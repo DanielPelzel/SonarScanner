@@ -1,12 +1,28 @@
-//
-// Created by Daniel Pelzel on 23.03.26.
-//
+/**
+ *@file RadarScanner
+ *@author Daniel Pelzel
+ *@brief measure Distance with HC-SR04 and Servo SG90 control
+ */
+
+
 #include <Arduino.h>
+#include <Servo.h>
 
-const int trig = 8;
-const int echo = 7;
+const uint8_t trig = 8; ///< Trigger pin for ultrasonic sensor (output)
+const uint8_t echo = 7; ///< echo pin for ultrasonic sensor (input)
+const uint8_t PWM = 9; ///< PWN-Signal for SG90 Servo
 
 
+/**
+ * Measures the distance to an object using an ultrasonic sensor.
+ *
+ * This function sends a trigger pulse through the trig pin of the ultrasonic sensor,
+ * receives the echo signal through the echo pin, and calculates the distance based on
+ * the time it takes for the signal to return. The calculation assumes that sound travels
+ * at a speed of 340 m/s in air.
+ *
+ * @return The measured distance in centimeters.
+ */
 float measure_distance() {
 
     // Sicherstellen, dass der Pin vorher LOW ist
@@ -28,11 +44,17 @@ float measure_distance() {
     return distance_cm;
 }
 
+void turn() {
+
+}
+
 
 
 void setup() {
     pinMode(trig, OUTPUT);
     pinMode(echo, INPUT);
+    pinMode(servo, OUTPUT);
+
     Serial.begin(9600);
 }
 
