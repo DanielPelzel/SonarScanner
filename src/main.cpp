@@ -98,13 +98,8 @@ void sendData(int angle, float distance) {
  * @param angle The desired angle for the servo, in degrees. Valid range is typically 0 to 180.
  */
 void turn(int angle) {
-
-
-
     servo.write(angle);
-
 }
-
 
 /**
  *
@@ -116,9 +111,6 @@ void setup() {
     servo.attach(9, 544, 2831);
 
     Serial.begin(9600);
-
-
-
 }
 
 /**

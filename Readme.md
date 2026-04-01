@@ -15,4 +15,8 @@ Python
 **Librarys:** pyserialm matplotlib, Arduino, time, serial,  
 **Backend:**  QT5Agg  
 
+## Demo
+![2026-04-01_18-24-14.png](docs/2026-04-01_18-24-14.png)
 
+## Hardware
+![RadarScannerHardware.jpeg](docs/RadarScannerHardware.jpeg)
