@@ -1,6 +1,8 @@
 import PyQt5
 from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QMainWindow, QHBoxLayout, QVBoxLayout, QLabel, QApplication, QPushButton, QWidget
+from PyQt5.QtWidgets import QMainWindow, QHBoxLayout, QVBoxLayout, QLabel, QApplication, QPushButton, QWidget, QStyleFactory
+
+
 
 
 class mainWindow(QMainWindow):
@@ -29,6 +31,29 @@ class mainWindow(QMainWindow):
         container.setLayout(layout)
         self.setCentralWidget(container)
 
+        self.setStyleSheet("""
+                                   QMainWindow {
+                                   background-color: black;
+                                   }
+
+                                   QWidget{
+                                   background-color: black;
+                                   color: lime;
+                                   }
+
+                                   QPushButton {
+                                    background-color: #1a1a1a;
+                                    border: 1px solid lime; 
+                                    padding: 5px;
+                                    color: lime;
+                                    border-radius: 5px;
+                                   }
+
+                                   QPushButton:pressed {
+                                   background-color: #2a2a2a;
+                                   }
+
+                """)
 
     def makeLabel(self, text):
         label = QLabel(text)
@@ -36,6 +61,7 @@ class mainWindow(QMainWindow):
         return label
 
 app = QApplication([])
+app.setStyle(QStyleFactory.create('Fusion'))
 window = mainWindow()
 window.show()
 app.exec_()
