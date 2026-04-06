@@ -8,6 +8,10 @@ import serial
 
 
 class Worker(QRunnable):
+    """
+    reads data from the serial port and sends it to the GUI
+    """
+
     def __init__(self):
         super().__init__()
         self.signals = WorkerSignals()
@@ -15,6 +19,14 @@ class Worker(QRunnable):
 
     @pyqtSlot()
     def run(self):
+        """
+        main function of the worker thread
+        reads data from the serial port and sends it to the GUI
+        Format of the data: theta, r (deg, cm)
+        :return:
+        """
+
+
         ser = serial.Serial("/dev/cu.usbmodem14201", 9600, timeout=0.1)
         time.sleep(2)
         print(ser.readline())
@@ -36,9 +48,17 @@ class Worker(QRunnable):
 
 
 class WorkerSignals(QObject):
+    """
+    Defines the signals available from a running worker thread.
+    """
+
     data = pyqtSignal(float, float)
 
 class mainWindow(QMainWindow):
+    """
+    main Window of the GUI
+    """
+
     def __init__(self):
         super().__init__()
 
@@ -112,20 +132,28 @@ class mainWindow(QMainWindow):
                 """)
 
     def start(self):
+        """create a new worker thread and start it"""
+
         self.worker = Worker()
         self.worker.signals.data.connect(self.updateData)
         self.threadPool.start(self.worker)
 
     def stop(self):
+        """stop the worker thread"""
+
         if hasattr(self, "worker"):
             self.worker.running = False
 
     def makeLabel(self, text):
+        """create a QLabel with the given text and center it"""
+
         label = QLabel(text)
         label.setAlignment(Qt.AlignCenter)
         return label
 
     def updateData(self, theta, r):
+        """update the GUI with the new data"""
+        
         self.distanzlabel.setText("Distanz: " + str(r))
         self.winkellabel.setText(f"Winkel: {np.rad2deg(theta):.1f}°")
 
