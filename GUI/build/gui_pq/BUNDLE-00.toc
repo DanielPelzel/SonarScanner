@@ -1,0 +1,3 @@
+([('gui_pq',
+   '/Users/danielpelzel/GitHub/RadarScanner/GUI/dist/gui_pq',
+   'EXECUTABLE')],)

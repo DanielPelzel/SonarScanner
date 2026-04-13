@@ -60,7 +60,7 @@ class RadarWidget(QtWidgets.QWidget):
             y_end = cy - max_r * math.sin(math.radians(winkel))
             painter.drawLine(cx, cy, int(x_end), int(y_end))
 
-        #text
+        #text angles
         font = QtGui.QFont("Arial", 15)
         painter.setFont(font)
         for winkel in range(0, 181, 30):
@@ -68,6 +68,12 @@ class RadarWidget(QtWidgets.QWidget):
             text_x = cx + text_r * math.cos(math.radians(winkel))
             text_y = cy - text_r * math.sin(math.radians(winkel))
             painter.drawText(int(text_x) - 10, int(text_y) + 5 , f"{str(winkel)}°")
+
+        #text distances
+        for i in range(1,5):
+            r_text = max_r // 4 * i
+
+            painter.drawText(cx-60, cy-r_text   , f"{str(r_text)}cm")
 
 
         #Dots for life data
